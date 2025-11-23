@@ -1,0 +1,12 @@
+services:
+  postgres:
+    container_name: clinic-manager-db
+    image: postgres:17
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=clinics
+    volumes:
+      - ./docker/setup.sql:/docker-entrypoint-initdb.d/init.sql
