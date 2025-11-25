@@ -4,15 +4,26 @@
   "main": "src/infra/http/server.ts",
   "scripts": {
     "test:unit": "bun test src/domain",
+    "test:e2e": "bun test --preload=tests/setup-e2e.ts src/infra",
     "test:watch": "bun test --watch src/domain",
-    "dev": "bun --hot src/infra/http/server.ts"
+    "dev": "bun --hot src/infra/http/server.ts",
+    "db:migrate": "bunx drizzle-kit migrate --config=drizzle.config.ts",
+    "db:generate": "bunx drizzle-kit generate --config=drizzle.config.ts"
   },
   "type": "module",
   "dependencies": {
+    "@bogeychan/elysia-logger": "^0.1.10",
     "@elysiajs/openapi": "^1.4.11",
+    "@elysiajs/opentelemetry": "^1.4.8",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.208.0",
+    "@opentelemetry/instrumentation-dns": "^0.52.0",
+    "@opentelemetry/instrumentation-http": "^0.208.0",
+    "@opentelemetry/instrumentation-pg": "^0.61.1",
+    "@opentelemetry/sdk-node": "^0.208.0",
     "drizzle-orm": "^0.44.7",
     "elysia": "latest",
     "postgres": "^3.4.7",
+    "uuid": "^13.0.0",
     "zod": "^4.1.12"
   },
   "devDependencies": {
@@ -20,5 +31,9 @@
     "@types/bun": "^1.3.3",
     "bun-types": "latest",
     "drizzle-kit": "^0.31.7"
+  },
+  "private": true,
+  "peerDependencies": {
+    "typescript": "^5"
   }
 }

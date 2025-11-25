@@ -1,8 +1,8 @@
-import { beforeAll, describe, expect, it } from 'bun:test';
-import { InMemoryUsersRepository } from '@/repositories/in-memory-users-repository';
-import { CreateUserUseCase } from './create-user';
+import { beforeAll, describe, expect, it } from "bun:test";
+import { InMemoryUsersRepository } from "@/repositories/in-memory-users-repository";
+import { CreateUserUseCase } from "./create-user";
 
-describe('Create User Use Case', () => {
+describe("Create User Use Case", () => {
 	let usersRepository: InMemoryUsersRepository;
 	let sut: CreateUserUseCase;
 
@@ -11,17 +11,19 @@ describe('Create User Use Case', () => {
 		sut = new CreateUserUseCase(usersRepository);
 	});
 
-	it('should create user', async () => {
+	it("should create user", async () => {
 		const data = {
-			name: 'John Doe',
+			name: "John Doe",
 		};
 
 		const result = await sut.execute(data);
 
-		expect(result.value?.user).toMatchObject({
-			props: {
-				name: data.name,
-			},
+		expect(result.success()).toBe(true);
+
+		if (result.failure()) return;
+
+		expect(result.value.user.props).toMatchObject({
+			name: data.name,
 		});
 	});
 });

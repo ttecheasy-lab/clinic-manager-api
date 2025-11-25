@@ -1,6 +1,7 @@
-import { app } from '../app';
-import { env } from '../env';
+import '../open-telemetry'
+import { app } from '../app'
+import { env } from '../env'
 
-const { server } = app.listen(env.PORT);
+const { server } = app.listen(env.PORT)
 
-console.log(`Server running on http://localhost:${server?.port}`);
+console.log(`Server running on http://localhost:${server?.port}`)
